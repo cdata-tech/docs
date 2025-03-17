@@ -1,0 +1,115 @@
+---
+description: "Description of your new file."
+title: "On-Premise for Linux"
+---
+
+# Install
+
+## OS requirements
+
+CMS for Linux is compatible with x86_64 (or amd64) architectures.
+
+To install CMS, you need the 64-bit version of one of these Ubuntu versions:
+
+- Ubuntu Noble 24.04 (LTS)
+
+## Environment requirements
+
+Before you install CMS for the first time on a new host machine. you need to install Docker.
+
+It is recommended to use the following Docker version to install CMS:
+
+- `containerd.io_1.7.23-1_amd64.deb`
+- `docker-ce_27.3.1-1\~ubuntu.24.04\~noble_amd64.deb`
+- `docker-ce-cli_27.3.1-1\~ubuntu.24.04\~noble_amd64.deb`
+- `docker-buildx-plugin_0.17.1-1\~ubuntu.24.04\~noble_amd64.deb`
+- `docker-compose-plugin_2.29.7-1\~ubuntu.24.04\~noble_amd64.deb`
+
+Refer to the documentation for install Docker:<https://docs.docker.com/engine/install/ubuntu/>
+
+## Install using the convenience script
+
+CMS provides a convenience script to install CMS. This example downloads the script and runs it to install the latest stable release of CMS on Linux.
+
+1. Download script
+
+```
+sudo curl -o cms_install.sh <https://cms.s.cdatayun.com/cms_linux/cms_install.sh> \
+&& sudo chmod +x ./cms_install.sh
+```
+
+1. Install CMS
+
+Install the CMS, Update the `<cms_version>` in the following example to the version of the CMS you downloaded.
+
+```
+sudo ./cms_install.sh install --version <cms_version>
+```
+
+## Upgrade CMS
+
+1. Upgrade CMS
+
+Upgrade the CMS, Update the `<cms_version>` in the following example to the version of the CMS you downloaded.
+
+```
+cd /path/to/CMS && sudo ./cms_install.sh upgrade --version <cms_version>
+```
+
+## Uninstall CMS
+
+1. Uninstall the CMS
+
+```
+cd /path/to/CMS && sudo docker compose down && sudo rm -rf docker-compose.yml .env
+```
+
+1. Remove CMS data
+
+Update the path in the following example to the volume path of the CMS you set up.
+
+```
+sudo rm -rf /path/to/volume && sudo rm -rf /path/to/CMS
+```
+
+# Manage CMS
+
+1. Start CMS
+
+```
+cd /path/to/CMS && sudo docker compose up -d
+```
+
+1. Stop CMS
+
+```
+cd /path/to/CMS && sudo docker compose stop
+```
+
+1. Restart CMS
+
+```
+cd /path/to/CMS && sudo docker compose restart
+```
+
+## Backup and Restore Data
+
+### Backup
+
+The `backup` command is used to back up CMS data.
+
+**backup run**
+
+手动备份CMS数据
+
+| Option | Default | Description                   |
+| ------ | ------- | ----------------------------- |
+| --path |         | Backup file storage directory |
+
+Example:
+
+```
+sudo /path/to/cms.sh backup run --path=/path/to/backup
+```
+
+```
